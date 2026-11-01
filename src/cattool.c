@@ -15,15 +15,14 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
-#define BUFFER_SIZE ((1024 * 1024 * 1) - 1)
+#define BUFFER_SIZE (BUFSIZ - 1)
 
 int main(int argc, char** argv) {
-  char buffer[BUFFER_SIZE+1];
+  char buffer[BUFFER_SIZE+1] = {0};
 
   if (argc < 2) {
-    printf("Usage: %s: [FILES...]\n", argv[0]);
+    printf("Usage: %s: FILE ...\n", argv[0]);
     return 1;
   }
 
@@ -38,8 +37,7 @@ int main(int argc, char** argv) {
     }
 
     while (fread(buffer, 1, BUFFER_SIZE, file) > 0) {
-      buffer[BUFFER_SIZE] = '\0';
-      printf("%s", buffer);
+      fputs(buffer, stdout);
     }
     
     fclose(file);
@@ -48,5 +46,6 @@ int main(int argc, char** argv) {
   }
 
   putchar('\n');
+
   return 0;
 }

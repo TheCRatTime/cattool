@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE ((1024 * 1024 * 10) - 1)
+#define BUFFER_SIZE ((1024 * 1024 * 1) - 1)
 
 int main(int argc, char** argv) {
   char buffer[BUFFER_SIZE+1];
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 
   argv++;
 
-  while(*argv != NULL) {
+  while (*argv != NULL) {
     FILE* file = fopen(*argv, "rb");
     if (file == NULL) {
       perror(argv[0]);
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
       continue;
     }
 
-    while(fread(buffer, 1, BUFFER_SIZE, file) > 0) {
+    while (fread(buffer, 1, BUFFER_SIZE, file) > 0) {
       buffer[BUFFER_SIZE] = '\0';
       printf("%s", buffer);
     }
